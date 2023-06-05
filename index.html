@@ -102,6 +102,73 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+    window.onerror = function(message, source, lineno, colno, error) {
+      console.error(`An error occurred: ${message}\nAt: ${source}:${lineno}:${colno}`);
+      return true; // prevents the firing of the default event handler
+    };
+
+    errorBtns.forEach((button, index) => {
+      button.addEventListener('click', () => {
+        try {
+        switch(index) {
+          case 0:
+            console.log('Console Log: ', sampleData);
+            break;
+          case 1:
+            console.error('Console Error: This is a simulated error message');
+            break;
+          case 2:
+            console.count('Console Count');
+            break;
+          case 3:
+            console.warn('Console Warn: This is a warning message');
+            break;
+          case 4:
+            console.assert(false, 'Console Assert: False condition');
+            break;
+          case 5:
+            console.clear();
+            break;
+          case 6:
+            console.dir(sampleData);
+            break;
+          case 7:
+            console.dirxml(document.querySelector('form'));
+            break;
+          case 8:
+            console.group('Console Group Start');
+            console.log('Log inside group');
+            console.warn('Warn inside group');
+            break;
+          case 9:
+            console.groupEnd();
+            break;
+          case 10:
+            console.table(sampleData);
+            break;
+          case 11:
+            console.time('Start Timer');
+            break;
+          case 12:
+            console.timeEnd('Start Timer');
+            break;
+          case 13:
+            console.trace('Console Trace');
+            break;
+          case 14:
+            throw new Error('Trigger a Global Error');
+            break;
+          default:
+            console.log('Button not configured');
+            break;
+        }
+      } catch(error) {
+        console.error('An error occurred: ', error.message);
+      } finally {
+        console.log('Button clicked. Index: ', index);
+      }
+      });
+    });
   </script>
 </body>
 
